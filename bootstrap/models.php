@@ -1,6 +1,7 @@
 <?php
 
 use DI\Container;
+use Model\MovieModel;
 use Model\PostModel;
 use repository\PostRepository;
 
@@ -17,6 +18,10 @@ require __DIR__ . '/repositories.php';
 // Define the 'model.post'
 $app->set('model.post', function ($app) {
     return new PostModel($app->get('repository.post'));
+});
+
+$app->set('model.movie', function ($app) {
+    return new MovieModel($app->get('repository.movie'));
 });
 
 // Return the DI container

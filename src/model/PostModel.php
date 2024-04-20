@@ -59,6 +59,10 @@ class PostModel
             return $response;
         }
 
+        /*$redis = new \Redis();
+
+        $redis->set('post', $requestBody);*/
+
         $result = $this->postRepository->createPost($requestBody);
 
         return [

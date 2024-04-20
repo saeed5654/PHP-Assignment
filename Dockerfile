@@ -7,6 +7,8 @@ WORKDIR /var/www/html
 # Install any necessary dependencies (if needed)
 # For example, if you need additional PHP extensions:
 RUN docker-php-ext-install mysqli
+RUN pecl install redis \
+ && docker-php-ext-enable redis
 
 # Copy the entire project directory into the container
 COPY . .

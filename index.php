@@ -5,7 +5,14 @@ use FastRoute\Dispatcher;
 
 require_once 'vendor/autoload.php'; // Include autoloader
 
-$routeVars = function ($routeInfo) { return $routeInfo = [2];};
+$routeVars = function ($routeInfo) {
+    //Get URL
+    $url = $_SERVER['REQUEST_URI'];
+    //Explode the URi with '/' to get last segment
+    $url = explode('/',$url);
+    //Route info with id
+    return $routeInfo = [end($url)];
+};
 
 // Create DI container
 $app = new Container();
@@ -44,7 +51,7 @@ switch ($routeInfo[0]) {
         break;
     case Dispatcher::FOUND:
         list($controllerName, $method) = $routeInfo[1];
-        $vars = call_user_func_array($routeVars, array_values($routeInfo[2]));
+        $vars = call_user_func_array($routeVars, array_values($routeInfo[1]));
 
         // Convert namespace separators to directory separators
         $convertedControllerName = str_replace('\\', '/', $controllerName);

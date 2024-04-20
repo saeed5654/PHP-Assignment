@@ -1,5 +1,9 @@
 version: '3'
 services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
   php:
     build:
       context: .
@@ -20,5 +24,17 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
 volumes:
   mysql_data:
