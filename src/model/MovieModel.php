@@ -21,8 +21,8 @@ class MovieModel
 
         if ($result) {
             while ($row = $result->fetch_assoc()) {
-                $redis = new \Redis();
-                $redis->set('movies', $row);
+                /*$redis = new \Redis();
+                $redis->set('movies', $row);*/
                 $movie[] = $this->variableCasting($row);
             }
         }
